@@ -1,0 +1,22 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.field label {
+  margin-bottom: 1em;
+}
+
+.field input {
+  font-size: 1rem;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  border: solid var(--accent) 1px;
+  outline: none;
+}
+
+.field input:focus {
+  box-shadow: 0 0 0 2px var(--accent);
+  transition: box-shadow 150ms;
+}
