@@ -1,14 +1,63 @@
-.background {
-  background-color: var(--blue);
-  background-image: radial-gradient(circle at 50% 150%, var(--green) 50%, #0000 50%);
-  background-attachment: fixed;
-  background-size: cover;
+.loginBody {
+  flex: 1;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  height: 100vh;
+  height: 100%;
+  margin-bottom: 1em;
+}
+
+.loginBody button,
+.loginBody .last {
+  margin: 0 auto;
+}
+
+.loginBody button {
+  margin-bottom: 1em;
 }
 
 .indication {
-  margin: 4em 0;
+  margin: 2em 0;
+  text-align: center;
+  font-weight: 100;
+  font-size: 1.2em;
+}
+
+.loginBody .last {
+  width: fit-content;
+  margin-bottom: 1em;
+  margin-top: auto;
+}
+
+.title {
+  text-align: center;
+}
+
+.desktopAside {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+@media (min-width: 768px) {
+  .loginBody {
+    width: 100%;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: 0;
+    justify-self: flex-end;
+    margin: 0;
+  }
+
+  .desktopAside {
+    flex: 0.5;
+    background-color: #fffA;
+    padding: 2em;
+  }
+
+  .desktopTitle {
+    flex: 1;
+    height: fit-content;
+    margin-top: 20vh;
+  }
 }

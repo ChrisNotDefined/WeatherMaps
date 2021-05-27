@@ -1,0 +1,50 @@
+.last {
+  margin-bottom: 1em;
+  margin-top: auto;
+  align-self: center;
+}
+
+.registerBody {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  height: calc(100% - 2em);
+  margin-bottom: 1em;
+}
+
+.title {
+  margin: 1em 0;
+  text-align: center;
+}
+
+.registerBody button {
+  margin: 0 auto;
+  margin-bottom: 2em;
+}
+
+.desktopAside {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) { 
+  .registerBody {
+    flex-direction: row;
+    margin-bottom: 0;
+  }
+
+  .desktopTitle {
+    flex: 1;
+    height: fit-content;
+    margin-top: 20vh;
+  }
+
+  .desktopAside {
+    flex: 0.5;
+    background-color: #fffA;
+    padding: 2em;
+    border-radius: 20px 0 0 20px;
+  }
+}

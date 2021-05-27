@@ -1,0 +1,12 @@
+.container {
+  width: fit-content;
+  padding-bottom: 2px;
+  color: black;
+  border-bottom: 2px solid;
+  user-select: none;
+}
+
+.container:active {
+  color: #333;
+}
+

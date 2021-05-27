@@ -1,5 +1,5 @@
 * {
-  --green: #239955;
+  --green: #3aca76;
   --blue: #daf8ff;
   --accent: #11cccc;
   --accent50: #11cccc88;
@@ -8,7 +8,7 @@
 html,
 body,
 #root {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
