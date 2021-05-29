@@ -20,7 +20,9 @@
   margin: 2em 0;
   text-align: center;
   font-weight: 100;
-  font-size: 1.2em;
+  font-size: 1.7em;
+  color: white;
+  text-shadow: #0005 0 0 4px;
 }
 
 .loginBody .last {
@@ -30,6 +32,8 @@
 }
 
 .title {
+  color: white;
+  text-shadow: #0005 0 0 5px;
   text-align: center;
 }
 
@@ -51,13 +55,20 @@
 
   .desktopAside {
     flex: 0.5;
-    background-color: #fffA;
-    padding: 2em;
+    background-color: #fffa;
+    padding: 0 4em;
+    box-shadow: #0005 0 -2px 10px;
   }
 
   .desktopTitle {
     flex: 1;
     height: fit-content;
     margin-top: 20vh;
+    font-size: 3vw;
+  }
+
+  .indication {
+    color: black;
+    text-shadow: #0005 0 0 2px;
   }
 }

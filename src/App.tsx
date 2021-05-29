@@ -8,6 +8,7 @@ import {
   Switch,
 } from "react-router-dom";
 import RegisterPage from "./pages/register_page/register_page";
+import MapPage from "./pages/map_page/map_page";
 
 function App() {
   return (
@@ -22,6 +23,12 @@ function App() {
           </Route>
           <Route path="/register">
             <RegisterPage />
+          </Route>
+          <Route path="/map">
+            <MapPage/>
+          </Route>
+          <Route path="*">
+            <Redirect to="/login"/>
           </Route>
         </Switch>
       </div>

@@ -1,0 +1,69 @@
+.container {
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  background-color: white;
+  border-radius: 20px 20px 0 0;
+  padding: 0 2em;
+  padding-bottom: 1em;
+  bottom: 0;
+  box-shadow: #0002 0 0 3px 3px;
+  transition: transform 200ms;
+}
+
+.container:not(.expanded) {
+  transform: translate(0, 75%);
+}
+
+.iconUp {
+  padding-top: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.iconUp i {
+  font-size: 1.5em;
+  margin-right: 0;
+  transition: transform 300ms;
+}
+
+.expanded i {
+  transform: rotate(540deg);
+}
+
+.action {
+  width: 100%;
+}
+
+.cityTitle {
+  user-select: none;
+  margin: 0;
+  padding-bottom: 1em;
+  font-weight: normal;
+  text-align: center;
+}
+
+.cityDetails {
+  display: flex;
+}
+
+.cityData {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.climateImg {
+  width: 40%;
+  height: 10em;
+  display: flex;
+  justify-content: center;
+  padding: 1em;
+}
+
+.climateImg img {
+  object-fit: scale-down;
+  width: 100%;
+}

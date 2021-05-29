@@ -34,11 +34,12 @@ function RegisterPage() {
     <Background>
       <div className={styles.registerBody}>
         <div className={styles.desktopTitle}>
-          <h2 className={styles.title}>Registro</h2>
+          <h1 className={styles.title}>Weather Maps</h1>
         </div>
         <div className={styles.desktopAside}>
+          <h4 className={styles.indication}>Registrate</h4>
           <FormComponent values={registerForm} />
-          <button>Registrarse</button>
+          <button className="button">Registrarse</button>
           <div className={styles.last}>
             <TextButton
               onClick={() => {

@@ -14,8 +14,9 @@
 }
 
 .title {
-  margin: 1em 0;
+  text-shadow: #0005 0 0 5px;
   text-align: center;
+  color: white;
 }
 
 .registerBody button {
@@ -29,7 +30,16 @@
   flex-direction: column;
 }
 
-@media (min-width: 768px) { 
+.indication {
+  text-align: center;
+  font-size: 1.8em;
+  font-weight: 100;
+  color: white;
+  color: white;
+  text-shadow: #0005 0 0 4px;
+}
+
+@media (min-width: 768px) {
   .registerBody {
     flex-direction: row;
     margin-bottom: 0;
@@ -39,12 +49,18 @@
     flex: 1;
     height: fit-content;
     margin-top: 20vh;
+    font-size: 3vw;
   }
 
   .desktopAside {
     flex: 0.5;
-    background-color: #fffA;
-    padding: 2em;
-    border-radius: 20px 0 0 20px;
+    background-color: #fffa;
+    padding: 0 4em;
+    box-shadow: #0005 0 -2px 10px;
+  }
+
+  .indication {
+    color: black;
+    text-shadow: #0005 0 0 2px;
   }
 }

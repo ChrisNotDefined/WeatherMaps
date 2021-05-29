@@ -39,7 +39,7 @@ function LoginPage() {
               Inicia sesión para ver tus ciudades
             </h5>
             <FormComponent values={loginForm} />
-            <button>Ingresar</button>
+            <button className="button">Ingresar</button>
             <div className={styles.last}>
               <TextButton
                 onClick={() => {
