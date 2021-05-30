@@ -67,3 +67,60 @@
   object-fit: scale-down;
   width: 100%;
 }
+
+.desktopTitle {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .container {
+    position: static;
+    z-index: 0;
+    height: 100%;
+    border-radius: 0;
+    padding: 2em;
+  }
+
+  .container:not(.expanded) {
+    transform: translate(0, 0);
+  }
+
+  .iconUp {
+    display: none;
+  }
+
+  .desktopExpanded {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .desktopTitle {
+    display: block;
+    user-select: none;
+    margin: 0;
+    padding-bottom: 1em;
+    font-weight: normal;
+    text-align: center;
+  }
+
+  .action {
+    margin-bottom: 0;
+    margin-top: auto;
+  }
+
+  .cityDetails {
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .cityData {
+    flex: 1;
+  }
+
+  .climateImg {
+    width: fit-content;
+    flex: 2;
+    align-self: stretch;
+  }
+}

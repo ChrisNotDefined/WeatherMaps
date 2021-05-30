@@ -1,0 +1,1 @@
+export const AUTH_CHANGED = '[LOGIN] AUTH_CHANGED';

@@ -14,6 +14,7 @@
 }
 
 .title {
+  user-select: none;
   text-shadow: #0005 0 0 5px;
   text-align: center;
   color: white;
@@ -37,6 +38,15 @@
   color: white;
   color: white;
   text-shadow: #0005 0 0 4px;
+}
+
+.error {
+  margin-bottom: 1em;
+  border-radius: 1em;
+  background-color: #fCC;
+  text-align: center;
+  color: #D00;
+  font-size: 1rem;
 }
 
 @media (min-width: 768px) {

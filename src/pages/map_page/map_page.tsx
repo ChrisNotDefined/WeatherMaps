@@ -5,23 +5,26 @@ import FavoritesBar from "../../components/favorites_bar/favorites_bar";
 import CityDetails from "../../components/city_details/city_details";
 
 function MapPage() {
-
-
   const mapControlOptions = (maps: GoogleMap.Maps): GoogleMap.MapOptions => {
     return {
       fullscreenControlOptions: {
         position: maps.ControlPosition.RIGHT_CENTER,
       },
-      zoomControlOptions:{
+      zoomControlOptions: {
         position: maps.ControlPosition.LEFT_CENTER,
       },
-    }
-  }
-
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+        position: maps.ControlPosition.RIGHT_TOP
+      }
+    };
+  };
 
   return (
     <div className={styles.container}>
-      <FavoritesBar />
+      <div className={styles.barSpace}>
+        <FavoritesBar />
+      </div>
       <div className={styles.map}>
         <GoogleMap
           bootstrapURLKeys={{
@@ -35,7 +38,9 @@ function MapPage() {
           options={mapControlOptions}
         ></GoogleMap>
       </div>
-      <CityDetails />
+      <div className={styles.desktopAside}>
+        <CityDetails />
+      </div>
     </div>
   );
 }

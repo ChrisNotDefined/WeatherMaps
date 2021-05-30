@@ -12,7 +12,8 @@ function CityDetails() {
         <i className="fas fa-chevron-up"></i>
         <h3 className={styles.cityTitle}>Cuernavaca</h3>
       </div>
-      <div>
+      <div className={styles.desktopExpanded}>
+        <h3 className={styles.desktopTitle}>Cuernavaca</h3>
         <div className={styles.cityDetails}>
           <div className={styles.cityData}>
             <div>Lluvioso</div>
@@ -20,7 +21,7 @@ function CityDetails() {
             <div>34 mm</div>
           </div>
           <div className={styles.climateImg}>
-            <img src="./assets/img/lluvia.svg" />
+            <img alt="weather-icon" src="./assets/img/lluvia.svg" />
           </div>
         </div>
         <button className={"button " + styles.action}>Guardar</button>

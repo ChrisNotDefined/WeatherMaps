@@ -4,14 +4,14 @@
   box-sizing: border-box;
   height: 64px;
   background-color: white;
-  box-shadow: #0008 0 0px 5px 5px;
+  box-shadow: #0005 0 0px 5px 5px;
   z-index: 1;
   overflow: hidden;
-  transition: height 200ms, background 200ms;
+  transition: height 200ms, background 200ms, border-radius 200ms;
 }
 
 .container.expanded {
-  height: 40%;
+  height: 500%;
   background-image: none;
   border-radius: 0 0 5px 5px;
 }
@@ -31,6 +31,7 @@
 }
 
 .signOut {
+  cursor: pointer;
   user-select: none;
   margin-left: auto;
   margin-right: 1em;
@@ -43,13 +44,22 @@
   text-shadow: #0008 0 0 1px;
 }
 
+.signOut i {
+  margin-left: 0.5em;
+}
+
 .toggle > * {
   transition: text-shadow 200ms;
 }
 
-
 .toggle:hover > * {
   text-shadow: #0008 0 0 1px;
+}
+
+.toggle i {
+  color: #444;
+  margin-right: 1em;
+  transition: transform 200ms;
 }
 
 .dropdown {
@@ -92,13 +102,6 @@
   margin: 0;
 }
 
-i {
-  color: #444;
-  margin-right: 1em;
-  transition: transform 200ms;
-}
-
-.expanded i {
+.expanded .toggle i {
   transform: rotate(270deg);
 }
-
