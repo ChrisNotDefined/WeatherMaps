@@ -47,10 +47,14 @@
 .error {
   margin-bottom: 1em;
   border-radius: 1em;
-  background-color: #fCC;
+  background-color: #fcc;
   text-align: center;
-  color: #D00;
+  color: #d00;
   font-size: 1rem;
+}
+
+.action i + * {
+  margin-left: 1em;
 }
 
 @media (min-width: 768px) {

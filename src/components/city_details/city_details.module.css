@@ -9,7 +9,12 @@
   padding-bottom: 1em;
   bottom: 0;
   box-shadow: #0002 0 0 3px 3px;
-  transition: transform 200ms;
+  transition: all 200ms;
+}
+
+.information {
+  text-align: center;
+  padding: 1em;
 }
 
 .container:not(.expanded) {

@@ -1,15 +1,21 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { FormComponent } from "../../components/form_component/form_component";
 import { Field } from "../../components/form_component/form_interface";
 import Background from "../../components/landing_background/background";
 import TextButton from "../../components/text_button/text_button";
+import { LOADED_DATA, LOADING_DATA } from "../../redux/actionTypes";
+import { IRState } from "../../redux/reducers";
 import firebaseApp, { getAuthErrorMsg } from "../../utils/firebaseApp";
 import { validEmail } from "../../utils/validators";
 import styles from "./login_page.module.css";
 
 function LoginPage() {
   const history = useHistory();
+  const isLoading = useSelector<IRState>((state) => state.isLoading) as boolean;
+
+  const dispatch = useDispatch();
 
   const [loginData, setLoginData] = useState({
     email: "",
@@ -44,15 +50,16 @@ function LoginPage() {
       return;
     }
 
-    console.log("logon");
+    dispatch({ type: LOADING_DATA });
 
     firebaseApp
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then((ans) => {
-        console.log(ans);
+        dispatch({ type: LOADED_DATA });
       })
       .catch((err) => {
+        dispatch({ type: LOADED_DATA });
         setErrors([getAuthErrorMsg(err.code)]);
       });
   };
@@ -93,12 +100,17 @@ function LoginPage() {
             </h5>
             <FormComponent values={loginForm} />
             <div className={styles.error}>
-              {errors.map((err, ind) => ( 
+              {errors.map((err, ind) => (
                 <p key={ind}>{err}</p>
               ))}
             </div>
-            <button onClick={handleLogin} className="button">
-              Ingresar
+            <button
+              onClick={handleLogin}
+              disabled={isLoading}
+              className={"button " + styles.action}
+            >
+              {isLoading && <i className="fas fa-snowflake spinning"></i>}
+              <span>Ingresar</span>
             </button>
             <div className={styles.last}>
               <TextButton

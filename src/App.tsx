@@ -6,7 +6,7 @@ import {
   Switch,
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { IRLogin } from "./redux/reducers";
+import { IRState, ReduxAction } from "./redux/reducers";
 import LoginPage from "./pages/login_page/login_page";
 import RegisterPage from "./pages/register_page/register_page";
 import MapPage from "./pages/map_page/map_page";
@@ -15,15 +15,15 @@ import firebaseApp from "./utils/firebaseApp";
 import { AUTH_CHANGED } from "./redux/actionTypes";
 
 function App() {
-  const isLoggedIn = useSelector<IRLogin>((state) => state.loggedIn);
+  const isLoggedIn = useSelector<IRState>((state) => state.loggedInID);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const loginSubs = firebaseApp.auth().onAuthStateChanged((data) => {
       if (data) {
-        dispatch({ type: AUTH_CHANGED, payload: true });
+        dispatch<ReduxAction>({ type: AUTH_CHANGED, payload: data.uid });
       } else {
-        dispatch({type: AUTH_CHANGED, payload: false})
+        dispatch({ type: AUTH_CHANGED, payload: null });
       }
     });
 

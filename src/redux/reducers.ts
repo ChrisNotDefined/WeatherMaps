@@ -1,26 +1,57 @@
-import { AUTH_CHANGED } from "./actionTypes";
+import { AUTH_CHANGED, LOADED_DATA, LOADED_PLACES, LOADING_DATA } from "./actionTypes";
+export interface Place {
+  name: string;
+}
+
 export interface ReduxAction {
   type: string;
   payload?: any;
 }
 
-export interface IRLogin {
-  loggedIn: boolean;
+export interface IRState {
+  loggedInID: string | null;
+  places?: Place[];
+  isLoading: boolean
 }
 
-const initialState: IRLogin = {
-  loggedIn: false,
+const initialState: IRState = {
+  loggedInID: null,
+  isLoading: false,
 };
 
 export const loginReducer = (
-  state: IRLogin = initialState,
+  state: IRState = initialState,
   action: ReduxAction
-): IRLogin => {
+): IRState => {
+
+  if(action.type === LOADING_DATA) {
+    return {
+      ...state,
+      isLoading: true
+    }
+  }
+
   if (action.type === AUTH_CHANGED) {
     return {
       ...state,
-      loggedIn: action.payload,
+      loggedInID: action.payload,
+      isLoading: false
     };
+  }
+
+  if (action.type === LOADED_PLACES) {
+    return {
+      ...state,
+      places: action.payload,
+      isLoading: false
+    };
+  }
+
+  if(action.type === LOADED_DATA) {
+    return {
+      ...state,
+      isLoading: false
+    }
   }
 
   return state;

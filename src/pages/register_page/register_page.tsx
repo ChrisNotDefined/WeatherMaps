@@ -5,11 +5,17 @@ import { Field } from "../../components/form_component/form_interface";
 import Background from "../../components/landing_background/background";
 import TextButton from "../../components/text_button/text_button";
 import { validEmail } from "../../utils/validators";
-import firebaseApp from "../../utils/firebaseApp";
+import firebaseApp, { getAuthErrorMsg } from "../../utils/firebaseApp";
 import styles from "./register.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import { IRState } from "../../redux/reducers";
+import { LOADED_DATA, LOADING_DATA } from "../../redux/actionTypes";
 
 function RegisterPage() {
   const history = useHistory();
+  const isLoading = useSelector<IRState>((state) => state.isLoading) as boolean;
+
+  const dispatch = useDispatch();
 
   const [errors, setErrors] = useState<string[]>([]);
 
@@ -60,14 +66,18 @@ function RegisterPage() {
       return;
     }
 
+    dispatch({ type: LOADING_DATA });
+
     try {
       const res = await firebaseApp
         .auth()
         .createUserWithEmailAndPassword(email, password);
-
+      dispatch({ type: LOADED_DATA });
       console.log(res);
     } catch (err) {
-      console.log(err);
+      dispatch({ type: LOADED_DATA });
+      setErrors([getAuthErrorMsg(err.code)]);
+      console.error(err);
     }
   };
 
@@ -118,8 +128,12 @@ function RegisterPage() {
               <p key={ind}>{err}</p>
             ))}
           </div>
-          <button onClick={handleRegister} className="button">
-            Registrarse
+          <button
+            onClick={handleRegister}
+            className={"button " + styles.action}
+          >
+            {isLoading && <i className="fas fa-snowflake spinning"></i>}
+            <span>Registrarse</span>
           </button>
           <div className={styles.last}>
             <TextButton
