@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { WeatherResponse } from "../../models/weather_response";
 import { IRState } from "../../redux/reducers";
-import { kelvinToCelsius, kelvinToFahren, sentenceCapitalize } from "../../utils/converters";
+import {
+  kelvinToCelsius,
+  kelvinToFahren,
+  sentenceCapitalize,
+} from "../../utils/converters";
 import styles from "./city_details.module.css";
 
 interface props {
@@ -18,10 +22,16 @@ function CityDetails(props: props) {
 
   return (
     <div
-      className={styles.container + " " + ((isLoading || !place || expanded) ? styles.expanded : " ")}
+      className={
+        styles.container +
+        " " +
+        (isLoading || !place || expanded ? styles.expanded : " ")
+      }
     >
       {isLoading ? (
-        <div className={styles.information}>Cargando</div>
+        <div className={styles.information}>
+          <i className="fas fa-snowflake spinning"></i> Cargando
+        </div>
       ) : !place ? (
         <div className={styles.information}>Seleccione un lugar</div>
       ) : (

@@ -1,0 +1,10 @@
+.selection {
+  width: 5ch;
+  height: 5ch;
+  transform: translate(-50%, -100%);
+}
+
+.selection img {
+  width: 100%;
+  height: 100%;
+}

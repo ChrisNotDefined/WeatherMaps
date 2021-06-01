@@ -4,6 +4,7 @@
 }
 
 .button {
+  cursor: pointer;
   outline: none;
   user-select: none;
   background-color: var(--accent);

@@ -1,4 +1,6 @@
 .container {
+  display: flex;
+  flex-direction: column;
   box-sizing: border-box;
   position: fixed;
   z-index: 1;
@@ -13,6 +15,11 @@
 }
 
 .information {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   text-align: center;
   padding: 1em;
 }
