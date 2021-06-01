@@ -10,20 +10,27 @@ import {
   LOADED_DATA,
   LOADED_PLACES,
   LOADING_DATA,
+  SET_POSITION,
 } from "../../redux/actionTypes";
 import { WEATHER_KEY } from "../../utils/credentials";
 import { WeatherResponse } from "../../models/weather_response";
-import LocationMarker from "../../components/location_marker/location_marker";
-import SelectionMarker from "../../components/selection_marker/selection_marker";
+import {
+  LocationMarker,
+  PlaceMarker,
+  SelectionMarker,
+} from "../../components/markers/markers";
+import { Place } from "../../models/DatabasePlace";
 
 function MapPage() {
-  const uid = useSelector<IRState>((state) => state.loggedInID) as string;
+  const uid = useSelector<IRState, string | null>((state) => state.loggedInID);
+  const places = useSelector<IRState, Place[] | undefined>(
+    (state) => state.places
+  );
   const dispatch = useDispatch();
 
-  const [selectedPosition, setSelectedPosition] = useState<GoogleMap.Coords>({
-    lat: 18.9,
-    lng: -99.2,
-  });
+  const selectedPosition = useSelector<IRState, GoogleMap.Coords>(
+    (state) => state.selectedPosition
+  );
 
   const [currentLocation, setCurrentLocation] = useState<GoogleMap.Coords>();
 
@@ -31,6 +38,8 @@ function MapPage() {
   const [apiInstance, setApiInstance] = useState<any>(undefined);
 
   const [weatherInfo, setWeatherInfo] = useState<WeatherResponse>();
+  const [locationInfo, setLocationInfo] =
+    useState<google.maps.GeocoderResult>();
 
   const mapControlOptions = (maps: GoogleMap.Maps): GoogleMap.MapOptions => {
     return {
@@ -53,7 +62,7 @@ function MapPage() {
         lat: pos.coords.latitude,
         lng: pos.coords.longitude,
       };
-      setSelectedPosition(coords);
+      dispatch({ type: SET_POSITION, payload: coords });
       setCurrentLocation(coords);
     });
   };
@@ -64,8 +73,8 @@ function MapPage() {
 
       if (status === "OK") {
         if (values) {
-          const data = values.pop();
-          console.log(data);
+          const data = values.find((v) => v.types.includes("locality"));
+          setLocationInfo(data);
         }
       }
     } catch (e) {
@@ -108,7 +117,8 @@ function MapPage() {
   ): Promise<void> => {
     const { lat, lng } = value;
 
-    setSelectedPosition({ lat, lng });
+    dispatch({ type: SET_POSITION, payload: { lat, lng } });
+
     dispatch({ type: LOADING_DATA });
 
     const geocodeP = loadGeocoding(lat, lng);
@@ -118,16 +128,33 @@ function MapPage() {
       await Promise.all([geocodeP, weatherP]);
       dispatch({ type: LOADED_DATA });
     } catch (e) {
+      dispatch({ type: LOADED_DATA });
+      console.error(e);
+    }
+  };
+
+  const handleSelection = async (coords: google.maps.LatLngLiteral) => {
+    const { lat, lng } = coords;
+    dispatch({ type: LOADING_DATA });
+
+    const geocodeP = loadGeocoding(lat, lng);
+    const weatherP = fetchWeatherInformation(lat, lng);
+
+    try {
+      await Promise.all([geocodeP, weatherP]);
+      dispatch({ type: LOADED_DATA });
+    } catch (e) {
+      dispatch({ type: LOADED_DATA });
       console.error(e);
     }
   };
 
   // Firestore handler
   useEffect(() => {
-    const userDoc = firebaseApp.firestore().collection("users").doc(uid);
+    const userDoc = firebaseApp.firestore().collection("users").doc(uid!);
     const snapshotSub = userDoc.onSnapshot((snapshot) => {
       const userData = snapshot.data();
-      dispatch({ type: LOADED_PLACES, payload: userData });
+      dispatch({ type: LOADED_PLACES, payload: userData && userData.places });
     });
 
     return () => {
@@ -138,7 +165,7 @@ function MapPage() {
   return (
     <div className={styles.container}>
       <div className={styles.barSpace}>
-        <FavoritesBar />
+        <FavoritesBar onLocationClick={handleSelection} />
       </div>
       <div className={styles.map}>
         <GoogleMap
@@ -153,6 +180,10 @@ function MapPage() {
           yesIWantToUseGoogleMapApiInternals
           onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
         >
+          <SelectionMarker
+            lat={selectedPosition.lat}
+            lng={selectedPosition.lng}
+          ></SelectionMarker>
           {currentLocation && (
             <LocationMarker
               lat={currentLocation?.lat}
@@ -165,14 +196,26 @@ function MapPage() {
               }
             />
           )}
-          <SelectionMarker
-            lat={selectedPosition.lat}
-            lng={selectedPosition.lng}
-          ></SelectionMarker>
+
+          {places &&
+            places.length > 0 &&
+            places.map((p, i) => (
+              <PlaceMarker
+                key={p.mainName + i}
+                lat={p.coords.lat}
+                lng={p.coords.lng}
+                onClick={() =>
+                  handleCoordClick({
+                    lat: p.coords.lat,
+                    lng: p.coords.lng,
+                  })
+                }
+              />
+            ))}
         </GoogleMap>
       </div>
       <div className={styles.desktopAside}>
-        <CityDetails place={weatherInfo} />
+        <CityDetails weatherData={weatherInfo} locationData={locationInfo} />
       </div>
     </div>
   );

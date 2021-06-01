@@ -1,6 +1,6 @@
 .selection {
-  width: 5ch;
-  height: 5ch;
+  width: 3em;
+  height: 3em;
   transform: translate(-50%, -100%);
 }
 

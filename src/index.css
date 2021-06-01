@@ -1,8 +1,9 @@
 * {
   --green: #3aca76;
+  --green50: #3aca7650;
   --blue: #daf8ff;
   --accent: #11cccc;
-  --accent50: #11cccc88;
+  --accent50: #11cccc50;
 }
 
 html,
