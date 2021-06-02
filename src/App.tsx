@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Redirect,
   Route,
   Switch,
@@ -33,7 +33,7 @@ function App() {
   });
 
   return (
-    <Router>
+    <Router basename="/">
       <div className="App">
         <Switch>
           <Route path="/login">

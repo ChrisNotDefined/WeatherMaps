@@ -118,7 +118,7 @@ function CityDetails(props: props) {
               <div className={styles.climateImg + " " + (weatherData.weather[0].icon.charAt(2) === 'd' ? styles.day : styles.night)}>
                 <img
                   alt="weather-icon"
-                  src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`}
+                  src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@4x.png`}
                 />
               </div>
             </div>

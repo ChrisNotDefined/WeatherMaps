@@ -102,7 +102,7 @@ function MapPage() {
   };
 
   const fetchWeatherInformation = async (lat: number, lng: number) => {
-    const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${WEATHER_KEY}&lang=es`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${WEATHER_KEY}&lang=es`;
 
     try {
       const res = (await (await fetch(url)).json()) as WeatherResponse;
